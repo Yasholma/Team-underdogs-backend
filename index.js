@@ -3,6 +3,11 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import router from './routes'
+import mongoose from 'mongoose'
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const HTML_FILE = path.join(__dirname, 'index.html')
 const app = express()
@@ -26,6 +31,14 @@ app.use((req, res, next) => {
   err.status = 404
   next(err)
 })
+
+mongoose.connect(process.env.DATABASE_URL, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useFindAndModify: true
+})
+  .then(() => console.log('database connected sucessfully'))
+  .catch(err => console.log(err))
 
 app.listen(PORT, () => {
   console.log(`App listening on ${PORT}`)
