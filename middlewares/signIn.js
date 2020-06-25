@@ -1,7 +1,7 @@
 const Validator = require('validator')
 const isEmpty = require('./is-Empty')
 
-const loginValidation = (data) => {
+const loginValidation = data => {
   const errors = {}
 
   data.email = !isEmpty(data.email) ? data.email : ''
@@ -21,7 +21,7 @@ const loginValidation = (data) => {
 
   return {
     errors,
-    isValid: isEmpty(errors)
+    isValid: isEmpty(errors),
   }
 }
-module.exports = loginValidation
+export default loginValidation

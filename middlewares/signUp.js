@@ -1,13 +1,12 @@
 const Validator = require('validator')
 const isEmpty = require('./is-Empty')
 
-const userInputValidation = (data) => {
+const userInputValidation = data => {
   const errors = {}
 
   data.name = !isEmpty(data.name) ? data.name : ''
   data.email = !isEmpty(data.email) ? data.email : ''
   data.password = !isEmpty(data.password) ? data.password : ''
- 
 
   if (!Validator.isLength(data.name, { min: 2, max: 50 })) {
     errors.name = 'name must be between 2 and 50 character'
@@ -34,7 +33,7 @@ const userInputValidation = (data) => {
 
   return {
     errors,
-    isValid: isEmpty(errors)
+    isValid: isEmpty(errors),
   }
 }
-module.exports = userInputValidation
+export default userInputValidation

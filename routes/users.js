@@ -24,8 +24,7 @@ router.post('/register', (req, res) => {
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password
-
+      password: req.body.password,
     })
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -54,7 +53,9 @@ router.post('/login', (req, res) => {
   User.findOne({ email })
     .then(user => {
       if (!user) {
-        return res.status(404).json({ msg: 'Username or password is Incorrect' })
+        return res
+          .status(404)
+          .json({ msg: 'Username or password is Incorrect' })
       }
       bcrypt.compare(password, user.password).then(isMatch => {
         if (!isMatch) {
@@ -64,8 +65,7 @@ router.post('/login', (req, res) => {
         }
         const payload = {
           id: user.id,
-          user: user.name
-
+          user: user.name,
         }
         jwt.sign(
           payload,
@@ -74,12 +74,13 @@ router.post('/login', (req, res) => {
           (err, token) => {
             res.status(200).json({
               status: 'success',
-              token: 'Bearer ' + token
+              token: 'Bearer ' + token,
             })
-          }
+          },
         )
       })
     })
     .catch(err => res.status(500).json({ err }))
 })
-module.exports = router
+
+export default router

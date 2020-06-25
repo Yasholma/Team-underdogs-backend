@@ -8,11 +8,8 @@ import swaggerUi from 'swagger-ui-express'
 import users from './routes/users'
 import swagger from './swagger.json'
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
+require('dotenv').config()
 
-const HTML_FILE = path.join(__dirname, 'index.html')
 const app = express()
 
 app.use(cors())

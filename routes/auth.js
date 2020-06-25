@@ -1,10 +1,10 @@
-import { Router } from 'express'
+// import { Router } from 'express'
 
-const authRouter = new Router()
+// const authRouter = new Router()
 
-/** For Testing Purposes: To be Removed */
-authRouter.get('/users', (req, res) => {
-  res.json({ user: 'John Doe' })
-})
+// /** For Testing Purposes: To be Removed */
+// authRouter.get('/users', (req, res) => {
+//   res.json({ user: 'John Doe' })
+// })
 
-export default authRouter
+// export default authRouter
